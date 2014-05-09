@@ -56,17 +56,17 @@ gulp.task('scripts', function () {
     var file_dir = 'js/';
     gulp.src(srcDir + file_dir + '**/*.*',{ base: './src' })
         .pipe(changed(buildPath + file_dir))
-        .pipe(print())
-        .pipe(gulp.dest(buildPath + file_dir));
+        .pipe(gulp.dest(buildPath + file_dir))
+        .pipe(print());
 
     });
 
-gulp.task('html_files', function () {
+gulp.task('html', function () {
     //collect all files in root di
     //move to dest folder
     gulp.src(srcDir + '/*')
-        .pipe(print())
-        .pipe(gulp.dest(buildPath));
+        .pipe(gulp.dest(buildPath))
+        .pipe(print());
 
 });
 
@@ -75,36 +75,32 @@ gulp.task('images', function () {
     var file_dir = 'images/';
     gulp.src(srcDir + file_dir + '**/*.*', { base: './src' })
         .pipe(changed(buildPath + file_dir))
+        .pipe(gulp.dest(buildPath + file_dir))
         .pipe(print())
-        .pipe(gulp.dest(buildPath + file_dir));
+        ;
 
 });
-
 
 gulp.task('fonts', function () {
 
     var file_dir = 'fonts/';
     gulp.src(srcDir + file_dir + '**/*.*',{ base: './src' })
         .pipe(changed(buildPath + file_dir))
+        .pipe(gulp.dest(buildPath + file_dir))
         .pipe(print())
-        .pipe(gulp.dest(buildPath + file_dir));
+        ;
 
 });
 
-
-
-
-
-gulp.task('css', function () {
+gulp.task('styles', function () {
 
     var file_dir = 'css/';
-    gulp.src(srcDir + file_dir + '**/*.*',{ base: './src' })
+    gulp.src(srcDir + file_dir + '**/*.css',{ base: './src' })
         .pipe(changed(buildPath + file_dir))
-        .pipe(print())
-        .pipe(gulp.dest(buildPath + file_dir));
+        .pipe(gulp.dest(buildPath + file_dir))
+        .pipe(print());
 
 });
-
 
 gulp.task("bower-files", function() {
      bower()
@@ -143,6 +139,22 @@ gulp.task('move', function(){
         .pipe(print());
 });
 
+// This will run in this order:
+// * build-clean
+// * build-scripts and build-styles in parallel
+// * build-html
+// * Finally call the callback function
+
+gulp.task('deploy', function(callback){
+    sequence(
+        'cleanup',
+        ['scripts', 'styles'],
+        'html',
+        'images',
+        'fonts',
+        callback);
+});
+
 // delete all the files in the deploy directory
 gulp.task('cleanup', function () {
     gulp.src(buildPath + '**/*.*' , {read: false})
@@ -156,7 +168,6 @@ gulp.task('clean', function () {
         .pipe(print())
         .pipe(clean());
 });
-
 
 // test - test your gulp file to see if it works
 gulp.task('test', function(){});
