@@ -76,8 +76,7 @@ gulp.task('images', function () {
     gulp.src(srcDir + file_dir + '**/*.*', { base: './src' })
         .pipe(changed(buildPath + file_dir))
         .pipe(gulp.dest(buildPath + file_dir))
-        .pipe(print())
-        ;
+        .pipe(print()) ;
 
 });
 
@@ -87,8 +86,7 @@ gulp.task('fonts', function () {
     gulp.src(srcDir + file_dir + '**/*.*',{ base: './src' })
         .pipe(changed(buildPath + file_dir))
         .pipe(gulp.dest(buildPath + file_dir))
-        .pipe(print())
-        ;
+        .pipe(print());
 
 });
 
@@ -103,7 +101,7 @@ gulp.task('styles', function () {
 });
 
 gulp.task("bower-files", function() {
-     bower()
+         bower()
          .pipe(gulp.dest(buildPath + 'vendors/'))
          .pipe(print());
 });
@@ -113,19 +111,6 @@ gulp.task("inject", function(){
   gulp.src(srcDir + '*.html')
       .pipe(inject(gulp.src([buildPath + "js/**/*.js", buildPath + "css/**/*.css"], {read: false})))
       .pipe(gulp.dest("./dist"));
-});
-
-/*copy files/dependencies from root to the source folder */
-
-gulp.task("srcbuild", function () {
-
-    gulp.src('./bootstrap/dist/css/*.css')
-        .pipe(gulp.dest(srcDir + 'bootstrap/css/'));
-    gulp.src('./bootstrap/dist/js/*.js')
-        .pipe(gulp.dest(srcDir + 'bootstrap/js/'));
-    gulp.src('./knockout/build/output/knockout-latest.js')
-        .pipe(gulp.dest(srcDir + 'js/vendor'));
-
 });
 
 gulp.task('default', ['html_files', 'scripts', 'fonts', 'images'], function () {});
@@ -140,9 +125,11 @@ gulp.task('move', function(){
 });
 
 // This will run in this order:
-// * build-clean
-// * build-scripts and build-styles in parallel
-// * build-html
+// * clean
+// * scripts and build-styles in parallel
+// * html
+// * images
+// * fonts
 // * Finally call the callback function
 
 gulp.task('deploy', function(callback){
