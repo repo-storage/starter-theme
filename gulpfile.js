@@ -31,14 +31,14 @@ var ignore = require('gulp-ignore');
 
 //  create some useful variables
 
-var srcDir = './src/';
+var srcDir = './app/';
 var scriptsPath = srcDir + 'js/';
 var buildPath = 'deploy/',
     ignore_files = [''];
 
 var src_files = [
-    './src/css/**/*.css',
-    './src/js/**/*.*'
+    './app/css/**/*.css',
+    './app/js/**/*.*'
 ];
 
 //-----end config ----
@@ -54,7 +54,7 @@ function getFolders(dir) {
 gulp.task('scripts', function () {
 
     var file_dir = 'js/';
-    gulp.src(srcDir + file_dir + '**/*.*',{ base: './src' })
+    gulp.src(srcDir + file_dir + '**/*.*',{ base: './app' })
         .pipe(changed(buildPath + file_dir))
         .pipe(gulp.dest(buildPath + file_dir))
         .pipe(print());
@@ -73,7 +73,7 @@ gulp.task('html', function () {
 gulp.task('images', function () {
 
     var file_dir = 'images/';
-    gulp.src(srcDir + file_dir + '**/*.*', { base: './src' })
+    gulp.src(srcDir + file_dir + '**/*.*', { base: './app' })
         .pipe(changed(buildPath + file_dir))
         .pipe(gulp.dest(buildPath + file_dir))
         .pipe(print()) ;
@@ -83,7 +83,7 @@ gulp.task('images', function () {
 gulp.task('fonts', function () {
 
     var file_dir = 'fonts/';
-    gulp.src(srcDir + file_dir + '**/*.*',{ base: './src' })
+    gulp.src(srcDir + file_dir + '**/*.*',{ base: './app' })
         .pipe(changed(buildPath + file_dir))
         .pipe(gulp.dest(buildPath + file_dir))
         .pipe(print());
@@ -93,7 +93,7 @@ gulp.task('fonts', function () {
 gulp.task('styles', function () {
 
     var file_dir = 'css/';
-    gulp.src(srcDir + file_dir + '**/*.css',{ base: './src' })
+    gulp.src(srcDir + file_dir + '**/*.css',{ base: './app' })
         .pipe(changed(buildPath + file_dir))
         .pipe(gulp.dest(buildPath + file_dir))
         .pipe(print());
@@ -119,7 +119,7 @@ gulp.task('default', ['html_files', 'scripts', 'fonts', 'images'], function () {
 gulp.task('move', function(){
     // the base option sets the relative root for the set of files,
     // preserving the folder structure
-    gulp.src(src_files, { base: './src' })
+    gulp.src(src_files, { base: './app' })
         .pipe(gulp.dest(buildPath))
         .pipe(print());
 });
