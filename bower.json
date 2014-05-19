@@ -20,7 +20,9 @@
     "knockout-bootstrap": "~0.2.1",
     "scroll-reveal": "~0.1.2",
     "fontawesome": "~4.0.3",
-    "angular": "~1.2.16"
+    "angular": "~1.2.16",
+    "angular-touch": "~1.2.16",
+    "angular-gestures": "~0.2.2"
   },
   "devDependencies": {
     "bootstrap": "~3.1.1",
