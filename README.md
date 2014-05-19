@@ -3,7 +3,7 @@ Starter Kit
 
 ##Description
 
-A simple Starter-Theme, packed with tools to easeß some basic frontend developers chores
+A simple Starter-Theme, packed with tools to ease basic frontend developers chores
 
 ###Quick Start
 
