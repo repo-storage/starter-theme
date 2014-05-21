@@ -16,7 +16,7 @@ var grunt = require('gulp-grunt');
 var inject = require('gulp-inject');
 var bower = require('gulp-bower-files');
 var ignore = require('gulp-ignore');
-
+var browserify = require('browserify');
 
 /*
  install gulp and dependencies the easy way
